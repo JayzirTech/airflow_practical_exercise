@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía Práctica: Configuración de Amazon RDS (PostgreSQL)</title>
+    <style>
+        :root {
+            --primary-color: #ff9900;
+            --secondary-color: #232f3e;
+            --bg-color: #f4f7f6;
+            --card-bg: #ffffff;
+            --text-color: #333333;
+            --border-color: #e1e4e8;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        h1 {
+            color: var(--secondary-color);
+            border-bottom: 3px solid var(--primary-color);
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+        h2 {
+            color: var(--secondary-color);
+            margin-top: 30px;
+            display: flex;
+            align-items: center;
+        }
+        h2::before {
+            content: "🗄️";
+            margin-right: 10px;
+            font-size: 0.8em;
+        }
+        ul {
+            background: #fafbfc;
+            border-left: 4px solid var(--primary-color);
+            padding: 20px 20px 20px 40px;
+            margin: 15px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+        strong {
+            color: var(--secondary-color);
+        }
+        code {
+            background-color: #eef2f5;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            color: #d63384;
+        }
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 0.9em;
+            color: #7f8c8d;
+            border-top: 1px solid var(--border-color);
+            padding-top: 20px;
+        }
+        .badge {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.8em;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Configuración de Amazon RDS (PostgreSQL) <span class="badge">Guía Técnica</span></h1>
+        <p>Paso a paso detallado para aprovisionar y asegurar una base de datos PostgreSQL en Amazon RDS bajo buenas prácticas de infraestructura.</p>
+
+        <h2>1. Método de Creación y Motor</h2>
+        <ul>
+            <li><strong>Método:</strong> Seleccionar <strong>Full configuration</strong> (Configuración completa) para tener control total de los parámetros de red, seguridad y almacenamiento en lugar de usar opciones predefinidas.</li>
+            <li><strong>Motor de Base de Datos:</strong> Elegir <strong>PostgreSQL</strong> con una versión estable y compatible para producción.</li>
+        </ul>
+
+        <h2>2. Gestión de Credenciales</h2>
+        <ul>
+            <li><strong>Opción de Credenciales:</strong> Elegir <strong>Self managed</strong> (Autogestionada) para introducir manualmente la contraseña maestra que previamente resguardamos en <em>AWS Secrets Manager</em>.</li>
+            <li><strong>Usuario Maestro:</strong> Definir un nombre claro (ej. <code>airflow</code>) alineado con los parámetros de la arquitectura.</li>
+        </ul>
+
+        <h2>3. Conectividad y Red (Seguridad Crítica)</h2>
+        <ul>
+            <li><strong>VPC:</strong> Asignar la misma Red Privada Virtual (VPC) donde residirán los componentes de cómputo (EC2 y ECS).</li>
+            <li><strong>Acceso Público (Publicly accessible):</strong> Marcar obligatoriamente en <strong>No</strong> para impedir que la base de datos quede expuesta a Internet; solo la red interna de AWS podrá comunicarse con ella.</li>
+            <li><strong>Grupo de Seguridad (VPC security group):</strong> Crear un grupo de seguridad dedicado (ej. <code>airflow-rds-sg</code>) configurado para permitir tráfico entrante exclusivamente en el puerto <strong>5432</strong>.</li>
+        </ul>
+
+        <h2>4. Configuración Adicional</h2>
+        <ul>
+            <li><strong>Nombre inicial de la base de datos (Initial database name):</strong> Indicar explícitamente un nombre (ej. <code>airflow_db</code>). Si se omite, los servicios de Airflow fallarán al intentar buscar una base predeterminada en el primer arranque.</li>
+        </ul>
+
+        <div class="footer">
+            <p>💡 Guía enfocada para laboratorios autónomos de bases de datos relacionales en AWS.</p>
+        </div>
+    </div>
+
+</body>
+</html>

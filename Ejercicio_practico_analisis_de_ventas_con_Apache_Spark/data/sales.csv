@@ -1,0 +1,16 @@
+order_id , order_date , customer_id , city , product , quantity , unit_price 
+1001 , 2026-09-01 , C001 , Barranquilla , Teclado , 2 , 85000 
+1002 , 2026-09-01 , C002 , Bogotá , Mouse , 3 , 45000 
+1003 , 2026-09-02 , C003 , Medellín , Monitor , 1 , 780000 
+1004 , 2026-09-02 , C001 , Barranquilla , Mouse , 2 , 45000 
+1005 , 2026-09-03 , C004 , Cali , Teclado , 1 , 85000 
+1006 , 2026-09-03 , C005 , Bogotá , Monitor , 2 , 780000 
+1007 , 2026-09-04 , C006 , Medellín , Audifonos , 2 , 120000 
+1008 , 2026-09-04 , C007 , Cali , Ratón , 0 , 45000 
+1009 , 2026-09-05 , C008 , Barranquilla , Teclado , -1 , 85000 
+1010 , 2026-09-05 , C009 , Bogotá , Audifonos , 1 , 120000 
+1011 , 2026-09-06 , C010 , Medellin , Teclado , 2 , 85000 
+1012 , 2026-09-06 , C011 , Cali , Monitor , 1 , -780000 
+1013 , 2026-09-07 , C012 , Barranquilla , Mouse , 4 ,45000 
+1014 , 2026-09-07 , C013 , Bogotá , Teclado , 1 , 85000 
+1015 , 2026-09-08 , C014 , Medellín , Audifonos , 3 , 120000
